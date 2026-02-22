@@ -1,6 +1,9 @@
 from drawtools import *
 import pygetwindow
 import sorting
+import termcolor as tc
+import colorama as cr
+import addAlgorithms as sorts
 import time
 
 # sort configuration
@@ -12,7 +15,7 @@ sortType = 'bubble'
 textAntiAlias = False
 
 # manage config inputs
-print('Input settings for the visualizer. Leave blank for default (in square brackets)')
+print(tc.colored('Input settings for the visualizer. Leave blank for default (in square brackets)', attrs=['bold', 'underline']))
 prompts = [
     'List length [256]: ',
     'Bar scale (width & height, in pixels) [2]: ',
@@ -36,6 +39,7 @@ for i in range(len(prompts)):
 # setup
 screen, clock = setup(Fullscreen)
 running = True
+cr.just_fix_windows_console()
 
 # add events
 addEvent("QUIT", lambda: globals().__setitem__("running", False))
@@ -51,7 +55,7 @@ def start():
 
 # sort setup
 numbers = sorting.randomList(listLength)
-sort = getattr(sorting, sortType)(numbers)
+sort = getattr(sorts, sortType)(numbers)
 sortStarted = False
 
 areaSize = listLength*barScale
@@ -152,3 +156,4 @@ while running:
     clock.tick(fps)
 
 quit()
+cr.deinit()
