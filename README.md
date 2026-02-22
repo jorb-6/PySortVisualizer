@@ -31,7 +31,6 @@ More controls will be added later.
 5. Selection sort
 
 ## Planned features (in order):
-1. Algorithm loading from files
-2. More algorithms
-3. More color themes
-4. Extra visual improvements
+1. More algorithms
+2. More color themes
+3. Extra visual improvements
