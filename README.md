@@ -24,11 +24,12 @@ Press the Start button to start the sorting.<br>
 More controls will be added later.
 
 ## Currenly supported algorithms:
-1. Bubble sort
-2. Comb sort
-3. Insertion sort
-4. Shell sort
-5. Selection sort
+1. Bubble
+2. Comb
+3. Insertion
+4. Shell
+5. Selection
+6. Bogo
 
 ## Planned features (in order):
 1. More algorithms
