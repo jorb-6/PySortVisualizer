@@ -21,13 +21,13 @@ def start():
 # sort configuration
 listLength = 512
 barScale = 2
-stepsPerFrame = 1000
+stepsPerFrame = 100
 fps = 60
 textAntiAlias = False
 
 # sort setup
 numbers = sorting.randomList(listLength)
-sort = sorting.shell(numbers)
+sort = sorting.bubble(numbers)
 sortStarted = False
 
 areaSize = listLength*barScale
