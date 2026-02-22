@@ -1,6 +1,37 @@
 from drawtools import *
+import pygetwindow
 import sorting
 import time
+
+# sort configuration
+listLength = 256
+barScale = 2
+stepsPerFrame = 25
+fps = 60
+sortType = 'bubble'
+textAntiAlias = False
+
+# manage config inputs
+print('Input settings for the visualizer. Leave blank for default (in square brackets)')
+prompts = [
+    'List length [256]: ',
+    'Bar scale (width & height, in pixels) [2]: ',
+    'Steps per frame [25]: ',
+    'Frames per second [60]: ',
+    'Sorting algorithm (all lowercase, must be valid) [bubble]: ',
+    'Antialias text (bool True or False, capitals matter) [False]: '
+]
+vars = ['listLength', 'barScale', 'stepsPerFrame', 'fps', 'sortType', 'textAntiAlias']
+ints = [0,1,2,3]
+bools = [5]
+for i in range(len(prompts)):
+    value = input(prompts[i])
+    if not value == '':
+        if i in ints:
+            value = int(value)
+        if i in bools:
+            value = bool(value)
+        globals()[vars[i]] = value
 
 # setup
 screen, clock = setup(Fullscreen)
@@ -18,21 +49,15 @@ def start():
     startTime = time.time()
     currentTime = startTime
 
-# sort configuration
-listLength = 512
-barScale = 2
-stepsPerFrame = 100
-fps = 60
-textAntiAlias = False
-
 # sort setup
 numbers = sorting.randomList(listLength)
-sort = sorting.bubble(numbers)
+sort = getattr(sorting, sortType)(numbers)
 sortStarted = False
 
 areaSize = listLength*barScale
 
 # visual elements
+pygame.display.set_caption('PySortVisualizer')
 bars = [rect((0, barScale*i), (barScale, barScale), RGBA('White')) for i in range(listLength)]
 startButton = button((round(areaSize/2)-63, round(areaSize/2)-23), (126, 45), start, RGBA('Purple'))
 startButtonText = text((round(areaSize/2)-46, round(areaSize/2)-23), RGBA('White'), 'Start', font('Arial', 40, bold=True))
@@ -54,6 +79,16 @@ sideText = [text((areaSize+2, 30+i*18), RGBA('White'), t, font('Arial', 16)) for
     '',
     'Press Q to quit.'
 ])]
+
+try:
+    windows = pygetwindow.getWindowsWithTitle('PySortVisualizer')
+    if windows:
+        target = windows[0]
+        target.activate()
+    else:
+        print('Visualizer window not found..?')
+except Exception as e:
+    print('Error occurred while focusing visualizer window: {e}')
 
 # main loop
 while running:

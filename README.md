@@ -31,8 +31,7 @@ More controls will be added later.
 5. Selection sort
 
 ## Planned features (in order):
-1. Settings selectable at runtime (currenly hardcoded)
-2. Algorithm loading from files
-3. More algorithms
-4. More color themes
-5. Extra visual improvements
+1. Algorithm loading from files
+2. More algorithms
+3. More color themes
+4. Extra visual improvements
