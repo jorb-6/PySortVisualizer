@@ -1,10 +1,10 @@
 from drawtools import *
 import pygetwindow
-import sorting
 import termcolor as tc
 import colorama as cr
 import addAlgorithms as sorts
 import time
+import random
 
 # sort configuration
 listLength = 256
@@ -53,8 +53,15 @@ def start():
     startTime = time.time()
     currentTime = startTime
 
+def randomList(size):
+    list = []
+    for i in range(size):
+        list.append(i+1)
+    random.shuffle(list)
+    return list
+
 # sort setup
-numbers = sorting.randomList(listLength)
+numbers = randomList(listLength)
 sort = getattr(sorts, sortType)(numbers)
 sortStarted = False
 
@@ -70,7 +77,7 @@ barsBackground = rect((0,0), (areaSize, areaSize), RGBA("#3F003C"))
 sideTextHeader = text((areaSize+2, 5), RGBA('White'), 'Extra sort information:', font('Arial', 24))
 sideText = [text((areaSize+2, 30+i*18), RGBA('White'), t, font('Arial', 16)) for i,t in enumerate([
     f'Sort type: {sort.type}',
-    f'Numbers to sort: {listLength}',
+    f'Numbers to sort: {len(sort.list)}',
     f'Sorting steps per frame: {stepsPerFrame}',
     f'Frames per second: {fps}',
     '',
@@ -92,10 +99,13 @@ try:
     else:
         print('Visualizer window not found..?')
 except Exception as e:
-    print('Error occurred while focusing visualizer window: {e}')
+    print(f'Error occurred while focusing visualizer window: {e}')
 
 # main loop
 while running:
+    if sort.list[-1] == 1:
+        print(sort.iteration)
+
     handleEvents()
     
     screen.fill("#1F001D")
@@ -151,7 +161,7 @@ while running:
     blit()
 
     # time keeping
-    if not sorting.isSorted(sort.list):
+    if not sort.finished:
         currentTime = time.time()
     clock.tick(fps)
 

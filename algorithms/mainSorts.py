@@ -41,6 +41,72 @@ class bubble:
             
             self.time += (time.perf_counter_ns() - start)
 
+class cocktail_shaker:
+    type = 'cocktail shaker'
+    finished = False
+    time = 0
+    swaps = 0
+    comparisons = 0
+
+    def __init__(self, nums: list[int]):
+        self.list = nums
+        self.iteration = 0
+        self.pointer = 0
+        self.pointer1 = 0
+        self.pointer2 = len(self.list)-1
+        self.mode = 0   # 0 = reset swapped, 1 = forward pass, 2 = check if sorted, 3 = backwards pass, 4 = increment start
+        self.swapped = False
+    
+    def step(self, times: int = 1):
+        for _ in range(times):
+            start = time.perf_counter_ns()
+
+            if self.finished:
+                return
+
+            if self.mode == 0:
+                self.swapped = False
+                self.pointer = self.pointer1
+                self.mode = 1
+            
+            elif self.mode == 1:
+                if self.pointer >= self.pointer2:
+                    self.mode = 2
+                else:
+                    self.comparisons += 1
+                    if self.list[self.pointer] > self.list[self.pointer + 1]:
+                        self.swaps += 1
+                        self.list[self.pointer], self.list[self.pointer + 1] = self.list[self.pointer + 1], self.list[self.pointer]
+                        self.swapped = True
+                    self.pointer += 1
+            
+            elif self.mode == 2:
+                if not self.swapped:
+                    self.finished = True
+                    break
+                self.pointer2 -= 1
+                self.swapped = False
+                self.pointer = self.pointer2-1
+                self.mode = 3
+            
+            elif self.mode == 3:
+                if self.pointer <= self.pointer1:
+                    self.mode = 4
+                else:
+                    self.comparisons += 1
+                    if self.list[self.pointer] > self.list[self.pointer + 1]:
+                        self.swaps += 1
+                        self.list[self.pointer], self.list[self.pointer + 1] = self.list[self.pointer + 1], self.list[self.pointer]
+                        self.swapped = True
+                    self.pointer -= 1
+            
+            elif self.mode == 4:
+                self.mode = 1
+                self.pointer1 += 1
+                self.iteration += 1
+            
+            self.time += (time.perf_counter_ns() - start)
+
 class comb:
     type = 'comb'
     finished = False
@@ -69,7 +135,7 @@ class comb:
                 self.gap = max(math.floor(self.gap / self.shrink), 1)
                 self.mode = 1
             
-            if self.mode == 1:
+            elif self.mode == 1:
                 if self.pointer < len(self.list) - self.gap:
                     i = self.pointer
                     self.comparisons += 1
@@ -120,7 +186,7 @@ class insertion:
                 self.pointer1 = self.pointer - 1
                 self.mode = 1
             
-            if self.mode == 1:
+            elif self.mode == 1:
                 if self.pointer1 >= 0:
                     self.comparisons += 1
                     if self.list[self.pointer1] > self.key:
@@ -132,7 +198,7 @@ class insertion:
                 else:
                     self.mode = 2
             
-            if self.mode == 2:
+            elif self.mode == 2:
                 self.swaps += 1
                 self.list[self.pointer1 + 1] = self.key
                 self.pointer += 1
@@ -230,7 +296,7 @@ class selection:
                 self.pointer1 = self.pointer + 1
                 self.mode = 1
             
-            if self.mode == 1:
+            elif self.mode == 1:
                 if self.pointer1 < len(self.list):
                     self.comparisons += 1
                     if self.list[self.pointer1] < self.list[self.minNumIdx]:
@@ -239,7 +305,7 @@ class selection:
                 else:
                     self.mode = 2
             
-            if self.mode == 2:
+            elif self.mode == 2:
                 self.swaps += 1
                 self.list[self.pointer], self.list[self.minNumIdx] = (
                     self.list[self.minNumIdx], self.list[self.pointer])
