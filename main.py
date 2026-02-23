@@ -1,5 +1,5 @@
 from drawtools import *
-import pygetwindow
+#import pygetwindow
 import termcolor as tc
 import colorama as cr
 import addAlgorithms as sorts
@@ -105,15 +105,15 @@ sideText = [text((areaSize+2, 30+i*18), RGBA(colors['text']), t, font('Arial', 1
     'Press Q to quit.'
 ])]
 
-try:
-    windows = pygetwindow.getWindowsWithTitle('PySortVisualizer')
-    if windows:
-        target = windows[0]
-        target.activate()
-    else:
-        print('Visualizer window not found..?')
-except Exception as e:
-    print(f'Error occurred while focusing visualizer window: {e}')
+#try:
+#    windows = pygetwindow.getWindowsWithTitle('PySortVisualizer')
+#    if windows:
+#        target = windows[0]
+#        target.activate()
+#    else:
+#        print('Visualizer window not found..?')
+#except Exception as e:
+#    print(f'Error occurred while focusing visualizer window: {e}')
 
 # main loop
 while running:
