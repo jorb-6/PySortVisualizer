@@ -33,5 +33,4 @@ More controls will be added later.
 
 ## Planned features (in order):
 1. More algorithms
-2. More color themes
-3. Extra visual improvements
+2. Extra visual improvements
