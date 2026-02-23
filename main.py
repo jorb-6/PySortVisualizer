@@ -67,15 +67,29 @@ sortStarted = False
 
 areaSize = listLength*barScale
 
+# theme setup
+themeFile = open('theme.cfg')
+themeRaw = themeFile.read()
+themeFile.close()
+
+theme = themeRaw.replace('\n', '').split(';')
+for i,v in enumerate(theme):
+    theme[i] = v.split(',') # type: ignore
+
+colors = {}
+for v in theme:
+    if not v[0] == '':
+        colors[v[0]] = [int(vv) for vv in v[1].split('.')]
+
 # visual elements
 pygame.display.set_caption('PySortVisualizer')
-bars = [rect((0, barScale*i), (barScale, barScale), RGBA('White')) for i in range(listLength)]
-startButton = button((round(areaSize/2)-63, round(areaSize/2)-23), (126, 45), start, RGBA('Purple'))
-startButtonText = text((round(areaSize/2)-46, round(areaSize/2)-23), RGBA('White'), 'Start', font('Arial', 40, bold=True))
-whenSortedText = text((round(areaSize/2)-63 ,round(areaSize/2)-23), RGBA('Really Green'), 'Sorted', font('Arial', 40, bold=True))
-barsBackground = rect((0,0), (areaSize, areaSize), RGBA("#3F003C"))
-sideTextHeader = text((areaSize+2, 5), RGBA('White'), 'Extra sort information:', font('Arial', 24))
-sideText = [text((areaSize+2, 30+i*18), RGBA('White'), t, font('Arial', 16)) for i,t in enumerate([
+bars = [rect((0, barScale*i), (barScale, barScale), RGBA(colors['bars'])) for i in range(listLength)]
+startButton = button((round(areaSize/2)-63, round(areaSize/2)-23), (126, 45), start, RGBA(colors['button']))
+startButtonText = text((round(areaSize/2)-46, round(areaSize/2)-23), RGBA(colors['buttonText']), 'Start', font('Arial', 40, bold=True))
+whenSortedText = text((round(areaSize/2)-63 ,round(areaSize/2)-23), RGBA(colors['whenSortedText']), 'Sorted', font('Arial', 40, bold=True))
+barsBackground = rect((0,0), (areaSize, areaSize), RGBA(colors['areaBackground']))
+sideTextHeader = text((areaSize+2, 5), RGBA(colors['sideHeaderText']), 'Extra sort information:', font('Arial', 24))
+sideText = [text((areaSize+2, 30+i*18), RGBA(colors['text']), t, font('Arial', 16)) for i,t in enumerate([
     f'Sort type: {sort.type}',
     f'Numbers to sort: {len(sort.list)}',
     f'Sorting steps per frame: {stepsPerFrame}',
@@ -103,12 +117,9 @@ except Exception as e:
 
 # main loop
 while running:
-    if sort.list[-1] == 1:
-        print(sort.iteration)
-
     handleEvents()
     
-    screen.fill("#1F001D")
+    screen.fill(colors['background'])
 
     # display sorted text and step sort
     if not sort.finished and sortStarted:
