@@ -25,12 +25,18 @@ More controls will be added later.
 
 ## Currenly supported algorithms:
 1. Bubble
-2. Comb
-3. Insertion
-4. Shell
-5. Selection
-6. Bogo
+2. Cocktail Shaker
+3. Comb
+4. Insertion
+5. Shell
+6. Selection
+7. Bogo
 
 ## Planned features (in order):
 1. More algorithms
+  - Bitonic
+  - Merge
+  - Quicksort
+  - Radix
+  - Max Heap  
 2. Extra visual improvements
