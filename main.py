@@ -105,6 +105,8 @@ sideText = [text((areaSize+2, 30+i*18), RGBA(colors['text']), t, font('Arial', 1
     'Press Q to quit.'
 ])]
 
+# removed because pygetwindow does not work on Linux and was not necessary in
+# the first place.
 #try:
 #    windows = pygetwindow.getWindowsWithTitle('PySortVisualizer')
 #    if windows:

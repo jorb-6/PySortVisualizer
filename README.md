@@ -24,13 +24,18 @@ Press the Start button to start the sorting.<br>
 More controls will be added later.
 
 ## Currenly supported algorithms:
-1. Bubble
-2. Cocktail Shaker
-3. Comb
-4. Insertion
-5. Shell
-6. Selection
-7. Bogo
+### Exchange sorts:
+1. Exchange
+2. Gnome
+3. Bubble
+4. Cocktail Shaker
+5. Comb
+### Other/Unclassified sorts:
+1. Insertion
+2. Shell
+3. Selection
+### Bogo sorts
+1. Bogo
 
 ## Planned features (in order):
 1. More algorithms
@@ -39,4 +44,5 @@ More controls will be added later.
   - Quicksort
   - Radix
   - Max Heap  
+  - Optimized bogo
 2. Extra visual improvements
