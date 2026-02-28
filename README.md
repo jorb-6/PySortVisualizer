@@ -1,7 +1,10 @@
 # PySortVisualizer
 
 ## Description
-PySortVisualizer is a simple tool made in Python to visualize sorting algorithms. The visualizer shows various extra information about the state of the algorithm, like the visual time, sort time, and operation count.
+PySortVisualizer is a simple tool made in Python to visualize sorting algorithms.
+The visualizer shows various extra information about the state of the algorithm,
+like the visual time, sort time, and operation count. There is also support for
+adding custom algorithms (see [Adding Algorihtms](#adding-algorithms)).
 
 ## Requirements
 - Python 3.10 or newer  
@@ -9,7 +12,7 @@ PySortVisualizer is a simple tool made in Python to visualize sorting algorithms
 
 ## How to Use
 
-### Initial setup
+### Initial Setup
 1. Create a Python virtual environment (venv): `python -m venv .venv`
 2. Activate the venv:<br>
    - <b> macOS / Linux</b>: `source .venv/bin/activate`
@@ -18,19 +21,31 @@ PySortVisualizer is a simple tool made in Python to visualize sorting algorithms
 3. Install dependencies: `pip install -r requirements.txt`
 4. Run the program: `python main.py`
 
-## Program controls:
+### Program Controls:
 Press Q to exit.<br>
 Press the Start button to start the sorting.<br>
 More controls will be added later.
 
-## Currenly supported algorithms:
-### Exchange sorts:
+### Adding Algorithms:
+To add an algorithm, add a python file to the algorithms folder.<br>
+For examples of how to make an algorithm, look at the premade files.
+
+### Changing the Color Theme:
+To change the color theme, modify theme.cfg.<br>
+<b><i>The format of theme.cfg is as follows:</b></i><br>
+`elementName,r.g.b;`<br>
+Where `elementName` is the element to change (ex. background, bars, text), `r`
+is the ammount of red (0-255), `g` is green (0-255), and `b` is blue (0-255).
+
+## Currenly Supported Algorithms:
+### Exchange Sorts:
 1. Exchange
 2. Gnome
 3. Bubble
 4. Cocktail Shaker
-5. Comb
-### Other/Unclassified sorts:
+5. Odd-Even
+6. Comb
+### Other/Unclassified Sorts:
 1. Insertion
 2. Shell
 3. Selection
@@ -38,7 +53,7 @@ More controls will be added later.
 1. Bogo
 2. Optimized bogo
 
-## Planned features (in order):
+## Planned Features (in order):
 1. More algorithms
   - Bitonic
   - Merge

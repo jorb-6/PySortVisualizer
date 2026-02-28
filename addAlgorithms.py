@@ -1,6 +1,5 @@
 import os
 import termcolor as tc
-import colorama as cr
 
 algorithmFiles = os.listdir('algorithms/')
 
@@ -22,7 +21,7 @@ for i,v in enumerate(algorithms):
     tc.cprint('Loading classes from algorithms/'+algorithmFiles[i], 'green')
     for ii,vv in enumerate(v):
         if vv[:5] == 'class':
-            tc.cprint(' - '+vv.split(':')[0][6:], 'blue')
+            tc.cprint(' - '+vv.split(':')[0][6:], 'cyan')
         exec(vv)
 
 tc.cprint('Warning: Using custom algorithms involves calling exec() to load the' \

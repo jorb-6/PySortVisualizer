@@ -30,7 +30,7 @@ class exchange:
                 self.pointer1 = self.pointer + 1
                 self.mode = 1
             
-            if self.mode == 1:
+            elif self.mode == 1:
                 self.comparisons += 1
                 if self.list[self.pointer] > self.list[self.pointer1]:
                     self.swaps += 1
@@ -173,6 +173,60 @@ class cocktail_shaker:
             elif self.mode == 4:
                 self.mode = 1
                 self.pointer1 += 1
+            
+            self.time += (time.perf_counter_ns() - start)
+
+class odd_even:
+    type = 'exchange: odd-even'
+    finished = False
+    time = 0
+    swaps = 0
+    comparisons = 0
+
+    def __init__(self, nums: list[int]):
+        self.list = nums
+        self.pointer = 1
+        self.swapped = False
+        self.mode = 0
+    
+    def step(self, times: int = 1):
+        for _ in range(times):
+            start = time.perf_counter_ns()
+
+            if self.finished:
+                return
+
+            if self.mode == 0:
+                self.comparisons += 1
+                if self.list[self.pointer] > self.list[self.pointer + 1]:
+                    self.swaps += 1
+                    self.swapped = True
+                    self.list[self.pointer], self.list[self.pointer + 1] = self.list[self.pointer + 1], self.list[self.pointer]
+                self.pointer += 2
+                if self.pointer >= len(self.list) - 1:
+                    self.mode = 1
+                    self.pointer = 0
+                    if self.swapped:
+                        self.swapped = False
+                    else:
+                        self.finished = True
+                        return
+            
+            elif self.mode == 1:
+                self.comparisons += 1
+                if self.list[self.pointer] > self.list[self.pointer + 1]:
+                    self.swaps += 1
+                    self.swapped = True
+                    self.list[self.pointer], self.list[self.pointer + 1] = self.list[self.pointer + 1], self.list[self.pointer]
+                self.pointer += 2
+                if self.pointer >= len(self.list) - 1:
+                    self.mode = 0
+                    self.pointer = 1
+                    if self.swapped:
+                        self.swapped = False
+                    else:
+                        self.finished = True
+                        return
             
             self.time += (time.perf_counter_ns() - start)
 
