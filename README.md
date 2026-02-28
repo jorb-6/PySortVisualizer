@@ -36,6 +36,7 @@ More controls will be added later.
 3. Selection
 ### Bogo sorts
 1. Bogo
+2. Optimized bogo
 
 ## Planned features (in order):
 1. More algorithms
@@ -43,6 +44,5 @@ More controls will be added later.
   - Merge
   - Quicksort
   - Radix
-  - Max Heap  
-  - Optimized bogo
+  - Max Heap
 2. Extra visual improvements
